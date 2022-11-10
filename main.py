@@ -7,6 +7,8 @@ from dash import Dash, dcc, html, Input, Output
 
 from urllib.request import urlopen
 import json
+
+from Dataset import Dataset
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties = json.load(response)
 
@@ -35,3 +37,5 @@ def display_map(clickData):
     return fig
 
 app.run_server(debug=True)
+
+t= Dataset
