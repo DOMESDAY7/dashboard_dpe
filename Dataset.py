@@ -5,13 +5,21 @@
 
 # nom_methode_dpe
 # version_methode_dpe
+# date_etablissement_dpe
+# consommation_energie
 # classe_consommation_energie
+# estimation_ges
 # classe_estimation_ges
+# annee_construction
+# surface_thermique_lot
+# latitude
+# longitude
 # tr001_modele_dpe_type_libelle
 # tr002_type_batiment_description
 # code_insee_commune_actualise
 # tv016_departement_code
 # geo_adresse
+# geo_score
 
 import requests as req
 

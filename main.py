@@ -38,4 +38,3 @@ def display_map(clickData):
 
 app.run_server(debug=True)
 
-t= Dataset
