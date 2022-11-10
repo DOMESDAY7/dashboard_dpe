@@ -29,9 +29,30 @@ class Dataset:
     @classmethod
     def getFields(cls):
         """
-        Return list of fields of the dataset
+        Returns a list of fields for which value is desired
         """
         return cls.fields
+
+    @classmethod
+    def getSize(cls):
+        """
+        Return size of the dataset
+        """
+        return cls.size
+
+    @classmethod
+    def getSelect(cls):
+        """
+        Return the selected filed for the dataset
+        """
+        return cls.select
+
+    @classmethod
+    def getSort(cls):
+        """
+        Return the sort filed sot this dataset
+        """
+        return cls.sort
 
     def getFieldValue(self):
         """
@@ -66,7 +87,7 @@ class Dataset:
                 url += "&select=" + "%2C".join(self.select)
             if (len(self.sort) != 0):
                 url += "&sort=" + "%2C".join(self.sort)
-        
+
             resp = req.get(url)
             return resp.json()
         except:
