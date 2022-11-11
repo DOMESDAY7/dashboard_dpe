@@ -1,26 +1,5 @@
 # This entity is used to get a dataset from the Data Fair API.
 
-
-# LIST OF THE FIELDS
-
-# nom_methode_dpe
-# version_methode_dpe
-# date_etablissement_dpe
-# consommation_energie
-# classe_consommation_energie
-# estimation_ges
-# classe_estimation_ges
-# annee_construction
-# surface_thermique_lot
-# latitude
-# longitude
-# tr001_modele_dpe_type_libelle
-# tr002_type_batiment_description
-# code_insee_commune_actualise
-# tv016_departement_code
-# geo_adresse
-# geo_score
-
 import requests as req
 
 
@@ -33,11 +12,29 @@ class Dataset:
         self.size = size
         self.select = select
         self.sort = sort
-
+    
     @classmethod
     def getFields(cls):
         """
         Returns a list of fields for which value is desired
+        List of fields :
+            nom_methode_dpe
+            version_methode_dpe
+            date_etablissement_dpe
+            consommation_energie
+            classe_consommation_energie
+            estimation_ges
+            classe_estimation_ges
+            annee_construction
+            surface_thermique_lot
+            latitude
+            longitude
+            tr001_modele_dpe_type_libelle
+            tr002_type_batiment_description
+            code_insee_commune_actualise
+            tv016_departement_code
+            geo_adresse
+            geo_score
         """
         return cls.fields
 
@@ -100,8 +97,3 @@ class Dataset:
             return resp.json()
         except:
             return "An error occured with the API please check your parameters"
-
-
-t = Dataset(select=("consommation_energie",
-            "classe_consommation_energie"), size=2)
-print(t.getData())
