@@ -6,13 +6,14 @@ import requests as req
 class Dataset:
 
     URL_BASE = "https://koumoul.com/data-fair/api/v1/datasets/dpe-france/"
+    url = ""
 
     def __init__(self, fields="nom_methode_dpe", size=0, select=(), sort=()):
         self.fields = fields
         self.size = size
         self.select = select
         self.sort = sort
-    
+
     @classmethod
     def getFields(cls):
         """
@@ -96,4 +97,4 @@ class Dataset:
             resp = req.get(url)
             return resp.json()
         except:
-            return "An error occured with the API please check your parameters"
+            return "An error occured with the API please check your parameters\n"+url
