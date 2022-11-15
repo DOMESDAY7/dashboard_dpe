@@ -1,0 +1,6 @@
+{
+    "conventionalCommits.scopes": [
+        "Dataset",
+        "main"
+    ]
+}
