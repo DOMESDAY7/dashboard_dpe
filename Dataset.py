@@ -10,9 +10,23 @@ class Dataset:
 
     def __init__(self, fields="nom_methode_dpe", size=0, select=(), sort=()):
         self.fields = fields
-        self.size = size
+        if(size >10000):
+            return "The data size is too big"
+            
+        else:
+            self.size = size
         self.select = select
         self.sort = sort
+        self.url = self.URL_BASE + "lines"
+        if (self.size != 0):
+            self.url = self.url+"?size="+str(self.size)
+        if (len(self.select) != 0):
+            if(type(self.select) == str):
+                self.url = self.url+"&select="+self.select
+            else:
+                self.url += "&select=" + "%2C".join(self.select)
+        if (len(self.sort) != 0):
+            self.url += "&sort=" + "%2C".join(self.sort)
 
     @classmethod
     def getFields(cls):
@@ -86,15 +100,15 @@ class Dataset:
             json data
         """
         try:
-            url = self.URL_BASE + "lines"
-            if (self.size != 0):
-                url = url+"?size="+str(self.size)
-            if (len(self.select) != 0):
-                url += "&select=" + "%2C".join(self.select)
-            if (len(self.sort) != 0):
-                url += "&sort=" + "%2C".join(self.sort)
-
-            resp = req.get(url)
+            resp = req.get(self.url)
             return resp.json()
         except:
-            return "An error occured with the API please check your parameters\n"+url
+            return "An error occured with the API please check your parameters\n"+self.url
+
+    def dumpURL(self):
+        """
+        Return the url of the dataset
+        """
+        return self.url
+
+
