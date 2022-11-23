@@ -8,25 +8,36 @@ class Dataset:
     URL_BASE = "https://koumoul.com/data-fair/api/v1/datasets/dpe-france/"
     url = ""
 
-    def __init__(self, fields="nom_methode_dpe", size=0, select=(), sort=()):
+    def __init__(self,
+                 fields="nom_methode_dpe",
+                 size=0,
+                 select=(),
+                 sort=(),
+                 geo_distance={"longitude": 0, "latitude": 0, "distance": 0}):
         self.fields = fields
-        if(size >10000):
+
+        if (size > 10000):
             return "The data size is too big"
-            
         else:
             self.size = size
         self.select = select
         self.sort = sort
         self.url = self.URL_BASE + "lines"
+        self.geo_distance = geo_distance
         if (self.size != 0):
             self.url = self.url+"?size="+str(self.size)
         if (len(self.select) != 0):
-            if(type(self.select) == str):
+            if (type(self.select) == str):
                 self.url = self.url+"&select="+self.select
             else:
                 self.url += "&select=" + "%2C".join(self.select)
         if (len(self.sort) != 0):
             self.url += "&sort=" + "%2C".join(self.sort)
+        if (self.geo_distance["longitude"] != 0 and self.geo_distance["latitude"] != 0 and self.geo_distance["distance"] != 0):
+            self.url += "&geo_distance=" + \
+                str(self.geo_distance["longitude"]) + \
+                "%2C"+str(self.geo_distance["latitude"]) + \
+                "%2C"+str(self.geo_distance["distance"])
 
     @classmethod
     def getFields(cls):
@@ -110,5 +121,4 @@ class Dataset:
         Return the url of the dataset
         """
         return self.url
-
 
