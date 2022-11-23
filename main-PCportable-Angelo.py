@@ -18,6 +18,12 @@ app.layout = html.Div([
             value="Coderre",
             inline=True
         ), ], className="card"),
+        html.Div([html.Div([html.H3("Histograme par commune")], className="card-header"), html.P("Select an histogram: ("+str(nbechantillon)+" échantillons)"), dcc.Graph(figure=figHist), dcc.RadioItems(
+            id='candidate',
+            options=["Joly", "Coderre", "Bergeron"],
+            value="Coderre",
+            inline=True
+        ), ], className="card"),
         html.Div([html.Div([html.H3("Carte de la France")],
                  className="card-header"), dcc.Graph(figure=figMap)], className="card"),
     ], id="globalContainer"),
