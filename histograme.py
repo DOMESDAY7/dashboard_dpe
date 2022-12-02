@@ -14,6 +14,7 @@ dgesbyten=dict()
 dgesbyten["1700"]=0
 dgesbyten["1900"]=0
 dgesbyten["1950"]=0
+dgesbyten["1970"]=0
 dgesbyten["2000"]=0
 dgesbyten["2010"]=0
 
@@ -22,6 +23,7 @@ danneetribyten=dict()
 danneetribyten["1700"]=0
 danneetribyten["1900"]=0
 danneetribyten["1950"]=0
+danneetribyten["1970"]=0
 danneetribyten["2000"]=0
 danneetribyten["2010"]=0
 
@@ -55,9 +57,12 @@ for i in sorted(dannee.keys()):
     elif(1900<=i<1950 and dges[i]>0):
       danneetribyten["1900"]+=dannee[i]
       dgesbyten["1900"]+=dges[i]
-    elif(1950<=i<2000 and dges[i]>0):
+    elif(1950<=i<1970 and dges[i]>0):
       danneetribyten["1950"]+=dannee[i]
       dgesbyten["1950"]+=dges[i]
+    elif(1970<=i<2000 and dges[i]>0):
+      danneetribyten["1970"]+=dannee[i]
+      dgesbyten["1970"]+=dges[i]
     elif(2000<=i<2010 and dges[i]>0):
       danneetribyten["2000"]+=dannee[i]
       dgesbyten["2000"]+=dges[i]  
@@ -71,6 +76,7 @@ moyenne=dict()
 moyenne["1700"]=dgesbyten["1700"]/danneetribyten["1700"]
 moyenne["1900"]=dgesbyten["1900"]/danneetribyten["1900"]
 moyenne["1950"]=dgesbyten["1950"]/danneetribyten["1950"]
+moyenne["1970"]=dgesbyten["1970"]/danneetribyten["1970"]
 moyenne["2000"]=dgesbyten["2000"]/danneetribyten["2000"]
 moyenne["2010"]=dgesbyten["2010"]/danneetribyten["2010"]
 
@@ -100,4 +106,4 @@ moyenne["2010"]=dgesbyten["2010"]/danneetribyten["2010"]
 
 # #figHist = px.histogram(x=["A", "B", "C", "D","E","F","G"], y=[d['A'], d['B'], d['C'], d['D'], d['E'], d['F'],d['G']])
 
-figHist2 = px.histogram(x=["1700-1899","1900-1949","1950-1999","2000-2009","2010-2015"], y=[moyenne['1700'],moyenne['1900'],moyenne['1950'],moyenne['2000'],moyenne["2010"]])
+figHist2 = px.histogram(x=["1700-1899","1900-1949","1950-1969","1970-2000","2000-2009","2010-2015"], y=[moyenne['1700'],moyenne['1900'],moyenne['1950'],moyenne["1970"],moyenne['2000'],moyenne["2010"]])
