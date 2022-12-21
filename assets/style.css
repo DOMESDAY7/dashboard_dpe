@@ -11,18 +11,31 @@ body{
 }
 h1{
    
-    margin: 2rem 0 2rem 1rem;
+    
     font-family: 'Overpass', sans-serif;
 }
+.wraper{
+    margin: 2rem 0 2rem 1rem;
+    gap: 1rem;
+    display:flex;
+    flex-direction: column;
+}
 .card{
-    border: 1px solid #ccc;
+    background-color: #373f60;
     border-radius: 5px;
-    padding: 0 0 1rem 0;
-    margin: 1rem;
+    padding: 1rem;
+    transition: ease-in-out 300ms;
+    
+}
+
+.card:hover{
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
+    background-color: #4a4f6b;
 }
 .card-header{
     
     width: 100%;
+    height: 5rem;
     margin:0;
     padding: 20px;
     border-bottom: 1px solid #ccc;
@@ -33,7 +46,8 @@ h1{
 .hist1{
     grid-area: hist1;
 }
-.globalContainer{
+.global-container{
     display: grid;
+    gap: 1rem;
     grid-template : "map hist1" 1fr / 1fr 1fr;
 }

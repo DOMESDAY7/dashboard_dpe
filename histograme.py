@@ -18,9 +18,9 @@ for i in t["results"]:
 print(d)
 print(t)
 
-nbechantillon=0
-nbechantillon=10000-d['N']
-print(nbechantillon)
+nbEchantillon=0
+nbEchantillon=10000-d['N']
+print(nbEchantillon)
 
 #for i in t["results"]:
     #if(i["annee_construction"] in dannee):
@@ -48,6 +48,6 @@ print(dannee)
 
 
 
-#figHist = px.histogram(x=["A", "B", "C", "D","E","F","G"], y=[d['A'], d['B'], d['C'], d['D'], d['E'], d['F'],d['G']])
+figHist = px.histogram(x=["A", "B", "C", "D","E","F","G"], y=[d['A'], d['B'], d['C'], d['D'], d['E'], d['F'],d['G']])
 
-figHist2 = px.histogram(x=["1950","1960"], y=[dannee['195'],dannee['1961']])
+# figHist2 = px.histogram(x=["1950","1960"], y=[dannee['195'],dannee['1961']])
