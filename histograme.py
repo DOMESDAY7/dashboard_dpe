@@ -37,6 +37,7 @@ danneetribyten["2010"]=0
 # print(t)
 
 nbechantillon=0
+nbechantillon2=0
 # nbechantillon=10000-d['N']
 # print(nbechantillon)
 
@@ -45,37 +46,46 @@ for i in t["results"]:
     if(i["annee_construction"] in dannee):
       dannee[i["annee_construction"]] += 1
       dges[i["annee_construction"]] += i["estimation_ges"]
+      #nbechantillon2=nbechantillon2+1
     else:
        dannee[i["annee_construction"]] = 1
        dges[i["annee_construction"]] = i["estimation_ges"]
+       #nbechantillon2=nbechantillon2+1
+      
+
+for i in sorted(dannee.keys()):
+    print(i,dannee[i],dges[i])
+    nbechantillon2=nbechantillon2+1
 
 #echantillonage avec des tranches d annees pour condenser les donnees en abscisses
 for i in sorted(dannee.keys()):
     if(1700<i<1900 and dges[i]>0):
       danneetribyten["1700"]+=dannee[i]
       dgesbyten["1700"]+=dges[i]
-      nbechantillon=nbechantillon+1
+      nbechantillon=nbechantillon+dannee[i]
     elif(1900<=i<1950 and dges[i]>0):
       danneetribyten["1900"]+=dannee[i]
       dgesbyten["1900"]+=dges[i]
-      nbechantillon=nbechantillon+1
+      nbechantillon=nbechantillon+dannee[i]
     elif(1950<=i<1970 and dges[i]>0):
       danneetribyten["1950"]+=dannee[i]
       dgesbyten["1950"]+=dges[i]
-      nbechantillon=nbechantillon+1
+      nbechantillon=nbechantillon+dannee[i]
     elif(1970<=i<2000 and dges[i]>0):
       danneetribyten["1970"]+=dannee[i]
       dgesbyten["1970"]+=dges[i]
-      nbechantillon=nbechantillon+1
+      nbechantillon=nbechantillon+dannee[i]
     elif(2000<=i<2010 and dges[i]>0):
       danneetribyten["2000"]+=dannee[i]
       dgesbyten["2000"]+=dges[i]
-      nbechantillon=nbechantillon+1  
+      nbechantillon=nbechantillon+dannee[i]  
     elif(2010<=i<2015 and dges[i]>0):
       danneetribyten["2010"]+=dannee[i]
       dgesbyten["2010"]+=dges[i]
-      nbechantillon=nbechantillon+1  
+      nbechantillon=nbechantillon+dannee[i] 
       
+
+print(nbechantillon)      
     # print(i,dannee[i])
 #moyenne des estimations ges total/nombre de foyers
 moyenne=dict()
