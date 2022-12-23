@@ -6,11 +6,11 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Overpass", sans-serif;
-  color: white;
 }
 
 body {
   background-color: #1e2338;
+  color: white;
 }
 h1 {
   font-family: "Overpass", sans-serif;
@@ -23,6 +23,10 @@ main {
   flex-direction: column;
   gap: 1rem;
   width: 100%;
+}
+a {
+  text-decoration: none;
+  color: white;
 }
 
 section:not(:first-child) {
@@ -70,6 +74,7 @@ footer {
   padding: 1rem;
   transition: ease-in-out 800ms;
   animation: moveUp 300ms ease;
+  max-width: 100em;
 }
 
 .card:hover {
@@ -85,14 +90,15 @@ footer {
   border-bottom: 1px solid #ccc;
 }
 
-.dashboard .card{
-    padding: unset;
-    overflow: hidden;
-    
+.dashboard .card {
+  padding: unset;
+  overflow: hidden;
+  width: 100%;
 }
 
 details.card {
   cursor: pointer;
+  max-width: unset;
 }
 
 /* dashboard */
@@ -103,19 +109,30 @@ details.card {
   background-color: #293049;
   border-radius: 5px;
   padding: 1rem;
-  margin: 2rem;
+  margin: 1rem auto;
+  max-width: 200rem;
+  width: 80%;
 }
 .dashboardItemsContainer {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
+  place-items: center;
 }
-/* faq section */
+@media (max-width: 768px) {
+  .dashboardItemsContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* faq container */
 .faq {
   display: flex;
   flex-direction: column;
   gap: 1rem 0;
-  width: 80%;
+  width: 70%;
+  max-width: 100rem;
+  
 }
 details p {
   color: #ccc;
