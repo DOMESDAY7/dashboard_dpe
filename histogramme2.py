@@ -7,33 +7,41 @@ t = Dataset(select=("annee_construction", "tv016_departement_code","classe_estim
 t = t.getData()
 # print(sorted((k,sorted(v.items()))for k,v in t.items))
 
+A=1
+B=1
+C=1
+D=1
+E=1
+F=1
+G=1
 
-# d= dict()
+Stock=0
 dges=dict()
-dgesbyten=dict()
-dgesbyten["1700"]=0
-dgesbyten["1900"]=0
-dgesbyten["1950"]=0
-dgesbyten["1970"]=0
-dgesbyten["2000"]=0
-dgesbyten["2010"]=0
+dgesbyregion=dict()
+dgesbyregion["IDF"]=0
+dgesbyregion["ARA"]=0
+dgesbyregion["BFR"]=0
+dgesbyregion["BRE"]=0
+dgesbyregion["CVL"]=0
+dgesbyregion["GE"]=0
 
 departlocalisation=dict()
 dlocalisation=dict()
-dlocalisation["Paris"]=0
-dlocalisation["Marseille"]=0
-dlocalisation["t"]=0
-dlocalisation["aris"]=0
-dlocalisation["ris"]=0
+dlocalisation["IDF"]=0
+dlocalisation["ARA"]=0
+dlocalisation["BFR"]=0
+dlocalisation["BRE"]=0
+dlocalisation["CVL"]=0
+dlocalisation["GE"]=0
 
-dannee=dict()
-danneetribyten=dict()
-danneetribyten["1700"]=0
-danneetribyten["1900"]=0
-danneetribyten["1950"]=0
-danneetribyten["1970"]=0
-danneetribyten["2000"]=0
-danneetribyten["2010"]=0
+
+
+IDF=("75","77","78","91","92","93","94","95")
+ARA=("01","03","07","15","26","38","42","43","63","69","73","74")
+BFR=("21","25","39","58","70","71","89","90")
+BRE=("22","29","35","56")
+CVL=("18","28","36","37","41","45")
+GE=("08","10","51","52","54","55","57","67","68","88")
 
 nbechantillon=0
 nbechantillon2=0
@@ -41,59 +49,55 @@ nbechantillon2=0
 
 #recuperation du nombre de foyers par annee de construction et un total des estimations ges pour faire la moyenne ensuite 
 for i in t["results"]:
-    print(i)
+    # print(i)
     if(i["tv016_departement_code"] in departlocalisation):
       departlocalisation[i["tv016_departement_code"]] += 1
-      #dges[i["annee_construction"]] += i["estimation_ges"]
+      dges[i["tv016_departement_code"]] += i["estimation_ges"]
       nbechantillon2=nbechantillon2+1
     else:
        departlocalisation[i["tv016_departement_code"]] = 1
-       #dges[i["annee_construction"]] = i["estimation_ges"]
+       dges[i["tv016_departement_code"]] = i["estimation_ges"]
        nbechantillon2=nbechantillon2+1
       
 
-for i in sorted(departlocalisation.keys()):
-    print(i,departlocalisation[i])
-    nbechantillon2=nbechantillon2+1
+# for i in sorted(departlocalisation.keys()):
+#     print(i,departlocalisation[i], dges[i])
+#     nbechantillon2=nbechantillon2+1
 
 #echantillonage avec des tranches d annees pour condenser les donnees en abscisses
-for i in sorted(dannee.keys()):
-    if(1700<i<1900 and dges[i]>0):
-      danneetribyten["1700"]+=dannee[i]
-      dgesbyten["1700"]+=dges[i]
-      nbechantillon=nbechantillon+dannee[i]
-    elif(1900<=i<1950 and dges[i]>0):
-      danneetribyten["1900"]+=dannee[i]
-      dgesbyten["1900"]+=dges[i]
-      nbechantillon=nbechantillon+dannee[i]
-    elif(1950<=i<1970 and dges[i]>0):
-      danneetribyten["1950"]+=dannee[i]
-      dgesbyten["1950"]+=dges[i]
-      nbechantillon=nbechantillon+dannee[i]
-    elif(1970<=i<2000 and dges[i]>0):
-      danneetribyten["1970"]+=dannee[i]
-      dgesbyten["1970"]+=dges[i]
-      nbechantillon=nbechantillon+dannee[i]
-    elif(2000<=i<2010 and dges[i]>0):
-      danneetribyten["2000"]+=dannee[i]
-      dgesbyten["2000"]+=dges[i]
-      nbechantillon=nbechantillon+dannee[i]  
-    elif(2010<=i<2015 and dges[i]>0):
-      danneetribyten["2010"]+=dannee[i]
-      dgesbyten["2010"]+=dges[i]
-      nbechantillon=nbechantillon+dannee[i] 
-      
+for i in sorted(departlocalisation.keys()):
 
-print(nbechantillon2)      
+    if(i in IDF and dges[i]>0):
+      dlocalisation["IDF"]+=departlocalisation[i]
+      dgesbyregion["IDF"]+=dges[i]
+    elif(i in ARA and dges[i]>0):
+      dlocalisation["ARA"]+=departlocalisation[i]
+      dgesbyregion["ARA"]+=dges[i]
+    elif(i in BFR and dges[i]>0):
+      dlocalisation["BFR"]+=departlocalisation[i]
+      dgesbyregion["BFR"]+=dges[i]
+    elif(i in BRE and dges[i]>0):
+      dlocalisation["BRE"]+=departlocalisation[i]
+      dgesbyregion["BRE"]+=dges[i]
+    elif(i in CVL and dges[i]>0):
+      dlocalisation["CVL"]+=departlocalisation[i]
+      dgesbyregion["CVL"]+=dges[i]
+    elif(i in GE and dges[i]>0):
+      dlocalisation["GE"]+=departlocalisation[i]
+      dgesbyregion["GE"]+=dges[i]
+      
+    
+
+print(nbechantillon)      
     # print(i,dannee[i])
 #moyenne des estimations ges total/nombre de foyers
-# moyenne=dict()
-# moyenne["1700"]=dgesbyten["1700"]/danneetribyten["1700"]
-# moyenne["1900"]=dgesbyten["1900"]/danneetribyten["1900"]
-# moyenne["1950"]=dgesbyten["1950"]/danneetribyten["1950"]
-# moyenne["1970"]=dgesbyten["1970"]/danneetribyten["1970"]
-# moyenne["2000"]=dgesbyten["2000"]/danneetribyten["2000"]
-# moyenne["2010"]=dgesbyten["2010"]/danneetribyten["2010"]
+moyenne=dict()
+moyenne["IDF"]=dgesbyregion["IDF"]/dlocalisation["IDF"]
+moyenne["ARA"]=dgesbyregion["ARA"]/dlocalisation["ARA"]
+moyenne["BFR"]=dgesbyregion["BFR"]/dlocalisation["BFR"]
+moyenne["BRE"]=dgesbyregion["BRE"]/dlocalisation["BRE"]
+moyenne["CVL"]=dgesbyregion["CVL"]/dlocalisation["CVL"]
+moyenne["GE"] =dgesbyregion["GE"]/dlocalisation["GE"]
 
 
-# figHist2 = px.histogram(x=["1700-1899","1900-1949","1950-1969","1970-2000","2000-2009","2010-2015"], y=[moyenne['1700'],moyenne['1900'],moyenne['1950'],moyenne["1970"],moyenne['2000'],moyenne["2010"]])
+figHist = px.histogram(x=["Ile-De-France","Auvergne-Rhône-Alples","Bourgogne-Franche-Comté","Bretagne","Centre-Val-de-Loire","Grand-Est"], y=[moyenne["IDF"],moyenne["ARA"],moyenne["BFR"],moyenne["BRE"],moyenne["CVL"],moyenne["GE"]])
