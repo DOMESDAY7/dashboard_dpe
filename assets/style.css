@@ -123,6 +123,12 @@ details.card {
   .dashboardItemsContainer {
     grid-template-columns: 1fr;
   }
+  .dashboard{
+    width: 100%;
+    margin: unset;
+    background-color: unset;
+  }
+
 }
 
 /* faq container */

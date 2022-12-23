@@ -40,7 +40,7 @@ class Dataset:
                 "%2C"+str(self.geo_distance["distance"])
 
     @classmethod
-    def getFields(cls):
+    def get_fields(cls):
         """
         Returns a list of fields for which value is desired
         List of fields :
@@ -99,7 +99,7 @@ class Dataset:
                        "?size=" + str(self.size))
         return resp.json()
 
-    def getData(self):
+    def get_data(self):
         """
         Return list of data of the dataset
         dependents on the size of the dataset and the field selected
