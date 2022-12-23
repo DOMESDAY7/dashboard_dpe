@@ -1,10 +1,10 @@
 import plotly.express as px
 from Dataset import Dataset
 
-
-t = Dataset(select=("annee_construction","classe_estimation_ges","estimation_ges"), size=10000)
+def histogrammeannee() :
+  t = Dataset(select=("annee_construction","classe_estimation_ges","estimation_ges"), size=10000)
 # print(t.dumpURL())
-t = t.getData()
+  t = t.getData()
 # print(sorted((k,sorted(v.items()))for k,v in t.items))
 
 

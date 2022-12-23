@@ -3,9 +3,7 @@ from Dataset import Dataset
 
 
 t = Dataset(select=("annee_construction", "tv016_departement_code","classe_estimation_ges","estimation_ges"), size=10000)
-# print(t.dumpURL())
 t = t.getData()
-# print(sorted((k,sorted(v.items()))for k,v in t.items))
 
 A=1
 B=1
