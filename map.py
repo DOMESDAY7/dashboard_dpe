@@ -4,7 +4,6 @@ import plotly.graph_objects as go
 class Map:
     def __init__(self):
         self.fig = go.Figure()
-        
 
     def getMap(self):
         """

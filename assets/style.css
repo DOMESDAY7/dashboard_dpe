@@ -1,72 +1,147 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Overpass', sans-serif;
-    color: white;
+@import url("https://fonts.googleapis.com/css2?family=Overpass&display=swap");
+
+/* general properties to reset the user agent style sheet */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Overpass", sans-serif;
+  color: white;
 }
-body{
-    background-color: #1e2338;
+
+body {
+  background-color: #1e2338;
 }
-h1{
-    font-family: 'Overpass', sans-serif;
+h1 {
+  font-family: "Overpass", sans-serif;
 }
-.wraper{
-    margin: 2rem;
-    gap: 1rem;
-    display:flex;
-    flex-direction: column;
+header {
+  margin: 2rem 0 0 2rem;
 }
-.card{
-    background-color: #373f60;
-    border-radius: 5px;
-    padding: 1rem;
-    transition: ease-in-out 800ms;
-    animation: moveUp 300ms ease;
-    
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
 }
-.faq{
-    display: flex;
-    flex-direction: column;
-    gap:1rem;
+
+section:not(:first-child) {
+  background-color: #121522;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-details p{
-    color: #ccc;
+
+footer img {
+  width: 2rem;
 }
-details.card{
-    cursor: pointer;
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
+
+.wraper {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
 /* just make  a smooth animation when the page as load*/
 @keyframes moveUp {
-    from{
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.card:hover{
-    box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
-    background-color: #3c4057;
+/* card properties */
+.card {
+  background-color: #373f60;
+  border-radius: 5px;
+  padding: 1rem;
+  transition: ease-in-out 800ms;
+  animation: moveUp 300ms ease;
 }
 
-.card-header{
+.card:hover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  background-color: #3c4057;
+}
+
+.card-header {
+  width: 100%;
+  height: 5rem;
+  margin: 0;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.dashboard .card{
+    padding: unset;
+    overflow: hidden;
     
-    width: 100%;
-    height: 5rem;
-    margin:0;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
 }
 
-.global-container{
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr;
-    background-color: #293049;
-    border-radius: 5px;
-    padding: 1rem;
+details.card {
+  cursor: pointer;
+}
+
+/* dashboard */
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  background-color: #293049;
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 2rem;
+}
+.dashboardItemsContainer {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+}
+/* faq section */
+.faq {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem 0;
+  width: 80%;
+}
+details p {
+  color: #ccc;
+}
+
+/* github container */
+.github {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #293049;
+  border-radius: 5px;
+  padding: 0.5rem;
+  transition: 300ms ease;
+}
+.github:hover {
+  background-color: #1e2338;
+}
+.containerGithub {
+  width: 50%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 1rem 0;
 }
