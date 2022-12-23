@@ -2,6 +2,16 @@ import plotly.graph_objects as go
 
 
 class Map:
+    """
+    Class to create a map
+    
+    it a return a plotly.graph_objects.Figure
+
+    Example :
+    figMap = Map()
+    figMap = figMap.getMap()
+
+    """
     def __init__(self):
         self.fig = go.Figure()
 
