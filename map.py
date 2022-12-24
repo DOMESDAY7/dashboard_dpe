@@ -15,7 +15,7 @@ class DpeMap:
     def __init__(self, df):
 
         self.figMap = px.scatter_mapbox(
-            df, lat="latitude", lon="longitude", size_max=15, zoom=4 , mapbox_style="carto-positron")
+            df, lat="latitude", lon="longitude", size_max=15, zoom=4, mapbox_style="carto-positron", color="Classe consommation d'énergie", hover_name="Adresse", hover_data=["Classe consommation d'énergie"], color_discrete_sequence=px.colors.cyclical.IceFire)
 
     def get_map(self):
         """

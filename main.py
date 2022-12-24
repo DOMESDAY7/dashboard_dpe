@@ -12,10 +12,13 @@ from Dataset import Dataset
 app = dash.Dash(__name__)
 
 data = Dataset(select=("latitude", "longitude",
-               "classe_estimation_ges"), size=100)
+               "classe_estimation_ges","geo_adresse"), size=10000)
 
 data = pd.DataFrame(data.get_data()["results"])
-
+#rename the column to be more readable
+data.rename(columns={"classe_estimation_ges": "Classe consommation d'énergie"}, inplace=True)
+data.rename(columns={"geo_adresse": "Adresse"}, inplace=True)
+print(data)
 
 figMap = DpeMap(data)
 figMap = figMap.get_map()
@@ -46,9 +49,12 @@ app.layout = html.Div([
                     )], className="card-header"),
                         dcc.Graph(figure=figHist, className="graph")],
                         className="card hist1"),
-                    html.Div([html.Div([html.H3("Carte de la France")],
-                                       className="card-header"),
-                              dcc.Graph(figure=figMap)], className="card map"),
+                    html.Div([html.Div([html.H3("Carte de la France"), dcc.RadioItems(
+                        id="mapDataRadio",
+                        options=[]
+                    )],
+                        className="card-header"),
+                        dcc.Graph(figure=figMap)], className="card"),
                 ], className="dashboardItemsContainer")
 
             ], className="dashboard"),
