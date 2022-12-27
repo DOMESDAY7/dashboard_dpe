@@ -7,7 +7,7 @@ from histogramme2 import figHist2
 #from histograme import nbechantillon
 import pandas as pd
 from map import DpeMap  # import the map
-# from faq import faqContent  # import the faq content
+from faq import faqContent  # import the faq content
 from Dataset import Dataset
 
 app = dash.Dash(__name__)
@@ -68,13 +68,13 @@ app.layout = html.Div([
         ]),
 
 
-        # # FAQ
-        # html.Section([
-        #     html.Div([
-        #         html.H3("FAQ"),
-        #         *faqContent
-        #     ], className="faq")
-        # ]),
+        # FAQ
+        html.Section([
+            html.Div([
+                html.H3("FAQ"),
+                *faqContent
+            ], className="faq")
+        ]),
 
         # Footer
         html.Footer([

@@ -1,15 +1,15 @@
 from dash import html
 import json
 
-# questionAnswer = []
+questionAnswer = []
 
-# with open("q&a.json", "r", encoding="utf-8") as f:
-#     questionAnswer = json.load(f)
-# f.close()
+with open("q&a.json", "r", encoding="utf-8") as f:
+    questionAnswer = json.load(f)
+f.close()
 
-# faqContent = []
-# for qAndA in questionAnswer:
-#     faqContent.append(html.Details([
-#         html.Summary(qAndA["question"]),
-#         html.P(qAndA["answer"])
-#     ], className="card"))
+faqContent = []
+for qAndA in questionAnswer:
+    faqContent.append(html.Details([
+        html.Summary(qAndA["question"]),
+        html.P(qAndA["answer"])
+    ], className="card"))
