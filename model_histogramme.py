@@ -43,7 +43,7 @@ class Histogramme:
         print(nbechantillon)
 
         self.figHist = px.histogram(x=moyenneges.keys(),
-                        y=moyenneges.values(),range_x=(1950,year),title="Estimation GES par foyer en Kg eq CO2/m².an",labels={"x": "Année de construction","y": "Estimation du GES"})
+                        y=moyenneges.values(),range_x=(1950,year),labels={"x": "Année de construction","y": "Estimation du GES"})
 
     def get_histo(self):
         return self.figHist

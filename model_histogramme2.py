@@ -102,7 +102,7 @@ class Histogramme2:
 
 
         self.figHist2 = px.histogram(x=["Ile-De-France", "Auvergne-Rhône-Alples", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val-de-Loire",
-                       "Grand-Est"], y=[moyenne["IDF"], moyenne["ARA"], moyenne["BFR"], moyenne["BRE"], moyenne["CVL"], moyenne["GE"]])
+                       "Grand-Est"], y=[moyenne["IDF"], moyenne["ARA"], moyenne["BFR"], moyenne["BRE"], moyenne["CVL"], moyenne["GE"]],labels={"x": "Région","y": "Estimation du GES"})
 
     def get_histo2(self):
         return self.figHist2

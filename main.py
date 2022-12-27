@@ -29,16 +29,16 @@ app.layout = html.Div([
                 # header
                 html.Div([
                     html.H1('DPE en France'),
-                    html.P('Nombre d\'échantillon : '),
                 ]),
                 html.Div([
-                    html.Div([html.Div([html.H3("Estimation GES par foyer en Kg eqCO2/m².an"),
-                                        dcc.RadioItems(
-                        id='choix',
-                        options=["Par Région", "Par Année"],
-                        value="Par Année",
-                        inline=True
-                    ),
+                    html.Div([html.Div([
+                        html.H3("Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de l'année de construction"),
+                    #     dcc.RadioItems(
+                    #     id='choix',
+                    #     options=["Par Région", "Par Année"],
+                    #     value="Par Année",
+                    #     inline=True
+                    # ),
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
                         dcc.Slider(id="year", min=1950, max=2020, value=2020,
@@ -54,6 +54,11 @@ app.layout = html.Div([
 
             ], className="dashboard"),
         ]),
+        html.Div([html.Div([
+                        html.H3("Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de la région"),
+                    ], className="card-header"),
+                    dcc.Graph(id="figurehist2",figure=histo2, className="graph")],
+                    className="card hist2"),
 
 
         # FAQ
@@ -87,15 +92,14 @@ app.layout = html.Div([
 @app.callback(
     Output("figurehist", "figure"),
     Input("year", "value"),
-    Input("choix", "value")
 )
-def testvalgraph(input_value, input_value2):
-    print(input_value, input_value2)
-    if (input_value2 == "Par Année"):
-        stock_histo=update(year=input_value)
-        figure = stock_histo
-    else:
-        figure = histo2
+def testvalgraph(input_value):
+    print(input_value)
+    # if (input_value2 == "Par Année"):
+    stock_histo=update(year=input_value)
+    figure = stock_histo
+    # else:
+    #     figure = histo2
     return figure
 
 
