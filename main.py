@@ -10,7 +10,7 @@ from model_dpe_map import DpeMap  # import the map
 from faq import faqContent  # import the faq content
 from Dataset import Dataset
 from controller_dpe_map import figMap  # import the map
-from controller_histogramme import histo  # import the histogram
+from controller_histogramme import update  # import the histogram
 from controller_histogramme2 import histo2  # import the histogram2
 
 app = dash.Dash(__name__)
@@ -42,7 +42,7 @@ app.layout = html.Div([
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
                         dcc.Slider(id="year", min=1950, max=2020, value=2020,
-                                   marks={1950: '1950', 2020: '2020'})],
+                                   marks={1950: '1950', 1960:'1960', 1970:'1970',1980:'1980',1990:'1990',2000:'2000',2010: '2010', 2020: '2020'})],
                         className="card hist1"),
                     html.Div([html.Div([html.H3("Carte de la France"), dcc.RadioItems(
                         id="mapDataRadio",
@@ -92,7 +92,8 @@ app.layout = html.Div([
 def testvalgraph(input_value, input_value2):
     print(input_value, input_value2)
     if (input_value2 == "Par Année"):
-        figure = histo
+        stock_histo=update(year=input_value)
+        figure = stock_histo
     else:
         figure = histo2
     return figure
