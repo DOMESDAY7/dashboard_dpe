@@ -3,7 +3,7 @@ import plotly.express as px
 import dash
 #from histograme import figHist
 from histograme import Histogramme
-from histogramme2 import figHist2
+from histogramme2 import Histogramme2
 #from histograme import nbechantillon
 import pandas as pd
 from map import DpeMap  # import the map
@@ -13,9 +13,12 @@ from Dataset import Dataset
 app = dash.Dash(__name__)
 
 data = Dataset(select=("annee_construction","latitude", "longitude",
-               "classe_estimation_ges","estimation_ges","geo_adresse"), size=10000)
-histo= Histogramme(data,year=1980)
+               "classe_estimation_ges","estimation_ges","tv016_departement_code","geo_adresse"), size=10000)
+histo= Histogramme(data,year=2020)
 histo=histo.get_histo()
+
+histo2=Histogramme2(data)
+histo2=histo2.get_histo2()
 
 data = pd.DataFrame(data.get_data()["results"])
 #rename the column to be more readable
@@ -46,13 +49,13 @@ app.layout = html.Div([
                 html.Div([
                     html.Div([html.Div([html.H3("Estimation GES par foyer en Kg eqCO2/m².an"),
                         dcc.RadioItems(
-                        id='candidate',
-                        options=["Par Région", "Par Annee"],
-                        value="Coderre",
+                        id='choix',
+                        options=["Par Région", "Par Année"],
+                        value="Par Année",
                         inline=True
                     ),
                         ], className="card-header"),
-                        dcc.Graph(id="figurehist",figure=histo, className="graph"), 
+                        dcc.Graph(id="figurehist", className="graph"), 
                         dcc.Slider(id="year", min=1950, max=2020, value=2020, 
                         marks={1950: '1950', 2020: '2020'})],
                         className="card hist1"),
@@ -97,11 +100,16 @@ app.layout = html.Div([
 
 @app.callback(
     Output("figurehist","figure"),
-    Input("year","value")
+    Input("year","value"),
+    Input("choix","value")
 )
-def testvalgraph(input_value):
-    print(input_value)
-    fighist.figure.range_x=(1950,input_value)
+def testvalgraph(input_value,input_value2):
+    print(input_value,input_value2)
+    if(input_value2=="Par Année"):
+        figure=histo
+    else:
+        figure=histo2
+    return figure
 
     
 

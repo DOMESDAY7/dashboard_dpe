@@ -12,17 +12,13 @@ from collections import namedtuple
 class Histogramme:
     def __init__(self,df, year=2020):
         t=df.get_data()
-        d = dict()
         dannee = dict()
         nbEchantillon = 0
         print(nbEchantillon)
         nbechantillon = 0
-        nbechantillon2 = 0
         datages = dict()
-        datagesbyten = dict()
         moyenneges = dict()
         dannee = dict()
-        danneetribyten = dict()
 
         # recuperation du nombre de foyers par annee de construction et un total des estimations ges pour faire la moyenne ensuite
         for i in t["results"]:

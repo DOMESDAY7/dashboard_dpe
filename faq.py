@@ -3,7 +3,7 @@ import json
 
 questionAnswer = []
 
-with open("q&a.json", "r", encoding="utf-8") as f:
+with open('questionsAnswers.json', "r", encoding="utf-8") as f:
     questionAnswer = json.load(f)
 f.close()
 
