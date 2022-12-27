@@ -2,35 +2,20 @@ from dash import dcc, html, Output, Input
 import plotly.express as px
 import dash
 #from histograme import figHist
-from histograme import Histogramme
-from histogramme2 import Histogramme2
+from model_histogramme import Histogramme
+from model_histogramme2 import Histogramme2
 #from histograme import nbechantillon
 import pandas as pd
-from map import DpeMap  # import the map
+from model_dpe_map import DpeMap  # import the map
 from faq import faqContent  # import the faq content
 from Dataset import Dataset
+from controller_dpe_map import figMap  # import the map
+from controller_histogramme import histo  # import the histogram
+from controller_histogramme2 import histo2  # import the histogram2
 
 app = dash.Dash(__name__)
 
-data = Dataset(select=("annee_construction","latitude", "longitude",
-               "classe_estimation_ges","estimation_ges","tv016_departement_code","geo_adresse"), size=10000)
-histo= Histogramme(data,year=2020)
-histo=histo.get_histo()
-
-histo2=Histogramme2(data)
-histo2=histo2.get_histo2()
-
-data = pd.DataFrame(data.get_data()["results"])
-#rename the column to be more readable
-data.rename(columns={"classe_estimation_ges": "Classe consommation d'énergie"}, inplace=True)
-data.rename(columns={"geo_adresse": "Adresse"}, inplace=True)
-print(data)
-
-figMap = DpeMap(data)
-figMap = figMap.get_map()
-
-
-
+# github icon
 githubIcon = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fgithub%2Fgithub_PNG40.png&f=1&nofb=1&ipt=92afafb5c28685482c8d684e15bfbbfd6e0b2cf2df06fe12edb86b7b4cf134e4&ipo=images"
 
 
@@ -48,16 +33,16 @@ app.layout = html.Div([
                 ]),
                 html.Div([
                     html.Div([html.Div([html.H3("Estimation GES par foyer en Kg eqCO2/m².an"),
-                        dcc.RadioItems(
+                                        dcc.RadioItems(
                         id='choix',
                         options=["Par Région", "Par Année"],
                         value="Par Année",
                         inline=True
                     ),
-                        ], className="card-header"),
-                        dcc.Graph(id="figurehist", className="graph"), 
-                        dcc.Slider(id="year", min=1950, max=2020, value=2020, 
-                        marks={1950: '1950', 2020: '2020'})],
+                    ], className="card-header"),
+                        dcc.Graph(id="figurehist", className="graph"),
+                        dcc.Slider(id="year", min=1950, max=2020, value=2020,
+                                   marks={1950: '1950', 2020: '2020'})],
                         className="card hist1"),
                     html.Div([html.Div([html.H3("Carte de la France"), dcc.RadioItems(
                         id="mapDataRadio",
@@ -98,20 +83,19 @@ app.layout = html.Div([
 
 ], className="wraper")
 
-@app.callback(
-    Output("figurehist","figure"),
-    Input("year","value"),
-    Input("choix","value")
-)
-def testvalgraph(input_value,input_value2):
-    print(input_value,input_value2)
-    if(input_value2=="Par Année"):
-        figure=histo
-    else:
-        figure=histo2
-    return figure
 
-    
+@app.callback(
+    Output("figurehist", "figure"),
+    Input("year", "value"),
+    Input("choix", "value")
+)
+def testvalgraph(input_value, input_value2):
+    print(input_value, input_value2)
+    if (input_value2 == "Par Année"):
+        figure = histo
+    else:
+        figure = histo2
+    return figure
 
 
 app.run_server(debug=True)
