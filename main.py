@@ -32,17 +32,18 @@ app.layout = html.Div([
                 ]),
                 html.Div([
                     html.Div([html.Div([
-                        html.H3("Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de l'année de construction"),
-                    #     dcc.RadioItems(
-                    #     id='choix',
-                    #     options=["Par Région", "Par Année"],
-                    #     value="Par Année",
-                    #     inline=True
-                    # ),
+                        html.H3(
+                            "Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de l'année de construction"),
+                        #     dcc.RadioItems(
+                        #     id='choix',
+                        #     options=["Par Région", "Par Année"],
+                        #     value="Par Année",
+                        #     inline=True
+                        # ),
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
                         dcc.Slider(id="year", min=1950, max=2020, value=2020,
-                                   marks={1950: '1950', 1960:'1960', 1970:'1970',1980:'1980',1990:'1990',2000:'2000',2010: '2010', 2020: '2020'})],
+                                   marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
                         className="card hist1"),
                     html.Div([html.Div([html.H3("Carte de la France"), dcc.RadioItems(
                         id="mapDataRadio",
@@ -50,15 +51,17 @@ app.layout = html.Div([
                     )],
                         className="card-header"),
                         dcc.Graph(figure=figMap)], className="card"),
-                ], className="dashboardItemsContainer")
+                ], className="dashboardItemsContainer"),
+                html.Div([html.Div([
+                    html.H3(
+                          "Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de la région"),
+                ], className="card-header"),
+                    dcc.Graph(id="figurehist2", figure=histo2, className="graph")],
+                    className="card hist2"),
 
             ], className="dashboard"),
         ]),
-        html.Div([html.Div([
-                        html.H3("Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de la région"),
-                    ], className="card-header"),
-                    dcc.Graph(id="figurehist2",figure=histo2, className="graph")],
-                    className="card hist2"),
+
 
 
         # FAQ
@@ -96,7 +99,7 @@ app.layout = html.Div([
 def testvalgraph(input_value):
     print(input_value)
     # if (input_value2 == "Par Année"):
-    stock_histo=update(year=input_value)
+    stock_histo = update(year=input_value)
     figure = stock_histo
     # else:
     #     figure = histo2
