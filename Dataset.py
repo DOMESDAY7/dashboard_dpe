@@ -1,7 +1,7 @@
 # This entity is used to get a dataset from the Data Fair API.
 
 import requests as req
-
+import pandas as pd
 
 class Dataset:
 
@@ -113,6 +113,22 @@ class Dataset:
         try:
             resp = req.get(self.url)
             return resp.json()
+        except:
+            return "An error occured with the API please check your parameters\n"+self.url
+    def get_dataframe(self):
+        """
+        Return a dataframe of the dataset
+        dependents on the size of the dataset and the field selected
+        Args :
+            select : tupple of field name
+            sort   : tupple of field name
+            size   : int
+        Return:
+            dataframe
+        """
+        try:
+            resp = req.get(self.url)
+            return pd.DataFrame(resp.json()["results"])
         except:
             return "An error occured with the API please check your parameters\n"+self.url
 
