@@ -28,12 +28,12 @@ app.layout = html.Div([
             html.Div([
                 # header
                 html.Div([
-                    html.H1('DPE en France'),
+                    html.H1('Diagnostic de Performance Energétique (DPE) en France'),
                 ]),
                 html.Div([
                     html.Div([html.Div([
                         html.H3(
-                            "Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de l'année de construction"),
+                            "Estimation Gaz à Effet de Serre par foyer\n en fonction de l'année de construction"),
                         #     dcc.RadioItems(
                         #     id='choix',
                         #     options=["Par Région", "Par Année"],
@@ -54,7 +54,7 @@ app.layout = html.Div([
                 ], className="dashboardItemsContainer"),
                 html.Div([html.Div([
                     html.H3(
-                          "Estimation Gaz à Effet de Serre par foyer en Kg eq CO2/m².an\n en fonction de la région"),
+                          "Estimation Gaz à Effet de Serre par foyer \n en fonction de la région"),
                 ], className="card-header"),
                     dcc.Graph(id="figurehist2", figure=histo2, className="graph")],
                     className="card hist2"),
@@ -94,16 +94,18 @@ app.layout = html.Div([
 
 @app.callback(
     Output("figurehist", "figure"),
+    Output("figurehist2", "figure"),
     Input("year", "value"),
 )
 def testvalgraph(input_value):
     print(input_value)
     # if (input_value2 == "Par Année"):
-    stock_histo = update(year=input_value)
+    stock_histo, stock_histo2 = update(year=input_value)
     figure = stock_histo
+    figure2 = stock_histo2
     # else:
     #     figure = histo2
-    return figure
+    return figure,figure2
 
 
 app.run_server(debug=True)
