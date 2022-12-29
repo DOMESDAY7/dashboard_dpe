@@ -38,12 +38,13 @@ class Histogramme:
                 moyenneges[i]= datages[i]/dannee[i]
                 print(i,dannee[i],moyenneges[i])
                 nbechantillon+=dannee[i]
+
         
 
         print(nbechantillon)
 
         self.figHist = px.histogram(x=moyenneges.keys(),
-                        y=moyenneges.values(),range_x=(1950,year),labels={"x": "Année de construction","y": "Estimation du GES"})
+                        y=moyenneges.values(),range_x=(1950,year),labels={"x": "Année de construction","y": "Estimation GES en Kg eq CO2/m² "})
 
     def get_histo(self):
         return self.figHist

@@ -10,15 +10,6 @@ class Histogramme2:
 
         t = df.get_data()
 
-        A = 1
-        B = 1
-        C = 1
-        D = 1
-        E = 1
-        F = 1
-        G = 1
-
-        Stock = 0
         dges = dict()
         dgesbyregion = dict()
         dgesbyregion["IDF"] = 0
@@ -29,6 +20,7 @@ class Histogramme2:
         dgesbyregion["GE"] = 0
 
         departlocalisation = dict()
+        localisation_annee=dict()
         dlocalisation = dict()
         dlocalisation["IDF"] = 0
         dlocalisation["ARA"] = 0
@@ -55,6 +47,7 @@ class Histogramme2:
             if (i["tv016_departement_code"] in departlocalisation):
                 departlocalisation[i["tv016_departement_code"]] += 1
                 dges[i["tv016_departement_code"]] += i["estimation_ges"]
+                # localisation_annee[i["tv016_departement_code"]]+=i["annee_construction"]
                 nbechantillon2 = nbechantillon2+1
             else:
                 departlocalisation[i["tv016_departement_code"]] = 1
@@ -102,7 +95,7 @@ class Histogramme2:
 
 
         self.figHist2 = px.histogram(x=["Ile-De-France", "Auvergne-Rhône-Alples", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val-de-Loire",
-                       "Grand-Est"], y=[moyenne["IDF"], moyenne["ARA"], moyenne["BFR"], moyenne["BRE"], moyenne["CVL"], moyenne["GE"]],labels={"x": "Région","y": "Estimation du GES"})
+                       "Grand-Est"], y=[moyenne["IDF"], moyenne["ARA"], moyenne["BFR"], moyenne["BRE"], moyenne["CVL"], moyenne["GE"]],labels={"x": "Région","y": "Estimation GES en Kg eq CO2/m² "})
 
     def get_histo2(self):
         return self.figHist2
