@@ -1,17 +1,13 @@
 from dash import dcc, html, Output, Input
 import plotly.express as px
 import dash
-#from histograme import figHist
 from model_histogramme import Histogramme
-from model_histogramme2 import Histogramme2
-#from histograme import nbechantillon
 import pandas as pd
 from model_dpe_map import DpeMap  # import the map
 from faq import faqContent  # import the faq content
 from Dataset import Dataset
 from controller_dpe_map import figMap  # import the map
 from controller_histogramme import update  # import the histogram
-from controller_histogramme2 import histo2  # import the histogram2
 
 app = dash.Dash(__name__)
 
@@ -34,15 +30,10 @@ app.layout = html.Div([
                     html.Div([html.Div([
                         html.H3(
                             "Estimation Gaz à Effet de Serre par foyer\n en fonction de l'année de construction"),
-                        #     dcc.RadioItems(
-                        #     id='choix',
-                        #     options=["Par Région", "Par Année"],
-                        #     value="Par Année",
-                        #     inline=True
-                        # ),
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
-                        dcc.Slider(id="year", min=1950, max=2020, value=2020,
+                        html.H4("Choix de l'intervalle d'année :"),
+                        dcc.Slider(id="year_GES", min=1950, max=2020, value=2020,
                                    marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
                         className="card hist1"),
                     html.Div([html.Div([html.H3("Carte de la France"), dcc.RadioItems(
@@ -50,13 +41,17 @@ app.layout = html.Div([
                         options=[]
                     )],
                         className="card-header"),
-                        dcc.Graph(figure=figMap)], className="card"),
+                        dcc.Graph(figure=figMap),
+                        ], className="card"),
                 ], className="dashboardItemsContainer"),
                 html.Div([html.Div([
                     html.H3(
-                          "Estimation Gaz à Effet de Serre par foyer \n en fonction de la région"),
+                          "Estimation Consommation énergétique par foyer en fonction de l'année de construction"),
                 ], className="card-header"),
-                    dcc.Graph(id="figurehist2", figure=histo2, className="graph")],
+                    dcc.Graph(id="figurehist2", className="graph"),
+                    html.H4("Choix de l'intervalle d'année :"),
+                    dcc.Slider(id="year_energie", min=1950, max=2020, value=2020,
+                                   marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
                     className="card hist2"),
 
             ], className="dashboard"),
@@ -95,12 +90,13 @@ app.layout = html.Div([
 @app.callback(
     Output("figurehist", "figure"),
     Output("figurehist2", "figure"),
-    Input("year", "value"),
+    Input("year_GES", "value"),
+    Input("year_energie", "value"),
 )
-def testvalgraph(input_value):
-    print(input_value)
+def callback_slider(year_GES,year_energie):
+    print(year_GES,year_energie)
     # if (input_value2 == "Par Année"):
-    stock_histo, stock_histo2 = update(year=input_value)
+    stock_histo, stock_histo2 = update(year_GES=year_GES,year_energie=year_energie)
     figure = stock_histo
     figure2 = stock_histo2
     # else:
