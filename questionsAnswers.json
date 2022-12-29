@@ -1,14 +1,14 @@
 [
     {
-        "question" :"D'ou proviennent les données ?", 
-        "answer":"Les données de ce dashboard proviennent d'une base de donnée réalisé par l'observatoire du DPE en France"
+        "question" :"D'où proviennent les données ?", 
+        "answer":"Les données de ce dashboard proviennent d'une base de donnée réalisée par l'observatoire du DPE en France"
     },
     {
         "question":"Qu'est-ce que le DPE ?",
-        "answer":"Le DPE est le diagnostique des performance énergétique, il sert principalement à évaluer la quantité d'énergie et de gaz à effet de serre d'un logement."
+        "answer":"Le DPE est le diagnostic de performance énergétique, il sert principalement à évaluer la quantité d'énergie et de gaz à effet de serre d'un logement."
     },
     {
         "question":"Cet indice est-il important ?",
-        "answer":"Oui, il est important car il permet de connaitre la consommation d'énergie d'un logement et donc de connaitre les émissions de gaz à effet de serre. Dans une période où la question de la consommation énergétique est un point centrale dans la société, il est important de savoir quels sont les émissions de gaz à effet de serre et la consommation énergétique dans un foyer. En France, en 2020, il existe encore 4.8 Millions de \" passoires thermiques \" (Le Monde). "
+        "answer":"Oui, il est important car il permet de connaitre la consommation d'énergie d'un logement et donc de connaitre les émissions de gaz à effet de serre. Dans une période où la question de la consommation énergétique est un point central dans la société, il est important de savoir quelles sont les émissions de gaz à effet de serre et la consommation énergétique dans un foyer. En France, en 2020, il existe encore 4.8 Millions de \" passoires thermiques \" (Le Monde). "
     }
 ]
