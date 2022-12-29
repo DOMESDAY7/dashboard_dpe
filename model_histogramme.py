@@ -14,11 +14,12 @@ class Histogramme:
         t=df.get_data()
         dannee = dict()
         nbEchantillon = 0
-        print(nbEchantillon)
+        # print(nbEchantillon)
         nbechantillon = 0
         datages = dict()
         moyenneges = dict()
         dannee = dict()
+        data_consommatione_energie=dict()
 
         # recuperation du nombre de foyers par annee de construction et un total des estimations ges pour faire la moyenne ensuite
         for i in t["results"]:
@@ -36,12 +37,12 @@ class Histogramme:
         for i in sorted(dannee.keys()):
             if(1950<=i<=year):
                 moyenneges[i]= datages[i]/dannee[i]
-                print(i,dannee[i],moyenneges[i])
+                # print(i,dannee[i],moyenneges[i])
                 nbechantillon+=dannee[i]
 
         
 
-        print(nbechantillon)
+        # print(nbechantillon)
 
         self.figHist = px.histogram(x=moyenneges.keys(),
                         y=moyenneges.values(),range_x=(1950,year),labels={"x": "Année de construction","y": "Estimation GES en Kg eq CO2/m² "})
