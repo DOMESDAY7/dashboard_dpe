@@ -1,101 +1,42 @@
 import plotly.express as px
 from Dataset import Dataset
+from collections import namedtuple
 
 
 # t = Dataset(select=("annee_construction", "tv016_departement_code",
 #             "classe_estimation_ges", "estimation_ges"), size=10000)
 
 class Histogramme2:
-    def __init__(self,df):
+    def __init__(self,df, year=2020):
 
         t = df.get_data()
-
-        dges = dict()
-        dgesbyregion = dict()
-        dgesbyregion["IDF"] = 0
-        dgesbyregion["ARA"] = 0
-        dgesbyregion["BFR"] = 0
-        dgesbyregion["BRE"] = 0
-        dgesbyregion["CVL"] = 0
-        dgesbyregion["GE"] = 0
-
-        departlocalisation = dict()
-        localisation_annee=dict()
-        dlocalisation = dict()
-        dlocalisation["IDF"] = 0
-        dlocalisation["ARA"] = 0
-        dlocalisation["BFR"] = 0
-        dlocalisation["BRE"] = 0
-        dlocalisation["CVL"] = 0
-        dlocalisation["GE"] = 0
-
-
-        IDF = ("75", "77", "78", "91", "92", "93", "94", "95")
-        ARA = ("01", "03", "07", "15", "26", "38", "42", "43", "63", "69", "73", "74")
-        BFR = ("21", "25", "39", "58", "70", "71", "89", "90")
-        BRE = ("22", "29", "35", "56")
-        CVL = ("18", "28", "36", "37", "41", "45")
-        GE = ("08", "10", "51", "52", "54", "55", "57", "67", "68", "88")
+        dannee=dict()
+        data_consommation_energie = dict()
+        moyenne_consommation_energie=dict()
 
         nbechantillon = 0
         nbechantillon2 = 0
+        compteur=0
+        test=dict()
 
-
-# recuperation du nombre de foyers par annee de construction et un total des estimations ges pour faire la moyenne ensuite
         for i in t["results"]:
-            # print(i)
-            if (i["tv016_departement_code"] in departlocalisation):
-                departlocalisation[i["tv016_departement_code"]] += 1
-                dges[i["tv016_departement_code"]] += i["estimation_ges"]
-                # localisation_annee[i["tv016_departement_code"]]+=i["annee_construction"]
-                nbechantillon2 = nbechantillon2+1
+            if (i["annee_construction"] in dannee and i["consommation_energie"]>0):
+                dannee[i["annee_construction"]] += 1
+                data_consommation_energie[i["annee_construction"]] += i["consommation_energie"]
+
             else:
-                departlocalisation[i["tv016_departement_code"]] = 1
-                dges[i["tv016_departement_code"]] = i["estimation_ges"]
-                nbechantillon2 = nbechantillon2+1
+                dannee[i["annee_construction"]] = 1
+                data_consommation_energie[i["annee_construction"]] = i["consommation_energie"]
 
 
-# for i in sorted(departlocalisation.keys()):
-#     print(i,departlocalisation[i], dges[i])
-#     nbechantillon2=nbechantillon2+1
 
-# echantillonage avec des tranches d annees pour condenser les donnees en abscisses
-        for i in sorted(departlocalisation.keys()):
+# moyenne de l estimation GES par foyer par année 
+        for i in sorted(dannee.keys()):
+            if(1950<=i<=year):
+                moyenne_consommation_energie[i]= data_consommation_energie[i]/dannee[i]
+                nbechantillon+=dannee[i]
 
-            if (i in IDF and dges[i] > 0):
-                dlocalisation["IDF"] += departlocalisation[i]
-                dgesbyregion["IDF"] += dges[i]
-            elif (i in ARA and dges[i] > 0):
-                dlocalisation["ARA"] += departlocalisation[i]
-                dgesbyregion["ARA"] += dges[i]
-            elif (i in BFR and dges[i] > 0):
-                dlocalisation["BFR"] += departlocalisation[i]
-                dgesbyregion["BFR"] += dges[i]
-            elif (i in BRE and dges[i] > 0):
-                dlocalisation["BRE"] += departlocalisation[i]
-                dgesbyregion["BRE"] += dges[i]
-            elif (i in CVL and dges[i] > 0):
-                dlocalisation["CVL"] += departlocalisation[i]
-                dgesbyregion["CVL"] += dges[i]
-            elif (i in GE and dges[i] > 0):
-                dlocalisation["GE"] += departlocalisation[i]
-                dgesbyregion["GE"] += dges[i]
-
-
-            print(nbechantillon)
-# print(i,dannee[i])
-# moyenne des estimations ges total/nombre de foyers
-        moyenne = dict()
-        moyenne["IDF"] = dgesbyregion["IDF"]/dlocalisation["IDF"]
-        moyenne["ARA"] = dgesbyregion["ARA"]/dlocalisation["ARA"]
-        moyenne["BFR"] = dgesbyregion["BFR"]/dlocalisation["BFR"]
-        moyenne["BRE"] = dgesbyregion["BRE"]/dlocalisation["BRE"]
-        moyenne["CVL"] = dgesbyregion["CVL"]/dlocalisation["CVL"]
-        moyenne["GE"] = dgesbyregion["GE"]/dlocalisation["GE"]
-
-
-        self.figHist2 = px.histogram(x=["Ile-De-France", "Auvergne-Rhône-Alples", "Bourgogne-Franche-Comté", "Bretagne", "Centre-Val-de-Loire",
-                       "Grand-Est"], y=[moyenne["IDF"], moyenne["ARA"], moyenne["BFR"], moyenne["BRE"], moyenne["CVL"], moyenne["GE"]],labels={"x": "Région","y": "Estimation GES en Kg eq CO2/m² "})
+        self.figHist2 = px.histogram(x=moyenne_consommation_energie.keys(), y=moyenne_consommation_energie.values(),range_x=(1950,year),labels={"x": "Année de construction","y": "Estimation Consommation énergétique en kWhEP/m² "})
 
     def get_histo2(self):
         return self.figHist2
