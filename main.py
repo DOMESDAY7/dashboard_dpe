@@ -32,6 +32,13 @@ app.layout = html.Div([
                             "Estimation Gaz à Effet de Serre par foyer\n en fonction de l'année de construction"),
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
+                        html.H4("Choix de l'année de début :"),
+                        dcc.RadioItems(
+                        id='choix_annee_debut_GES',
+                        options=[1950, 1960, 1970,1980,1990,2000,2010],
+                        value=1950,
+                        inline=True
+                        ),
                         html.H4("Choix de l'intervalle d'année :"),
                         dcc.Slider(id="year_GES", min=1950, max=2020, value=2020,
                                    marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
@@ -46,9 +53,17 @@ app.layout = html.Div([
                 ], className="dashboardItemsContainer"),
                 html.Div([html.Div([
                     html.H3(
-                          "Estimation Consommation énergétique par foyer en fonction de l'année de construction"),
+                          "Estimation Consommation énergétique par foyer en fonction de l'année de construction\n"),
                 ], className="card-header"),
                     dcc.Graph(id="figurehist2", className="graph"),
+                    html.H4("Choix de l'année de début :"),
+                    dcc.RadioItems(
+                        id='choix_annee_debut_energie',
+                        options=[1950, 1960, 1970,1980,1990,2000,2010],
+                        value=1950,
+                        inline=True
+                        ),
+
                     html.H4("Choix de l'intervalle d'année :"),
                     dcc.Slider(id="year_energie", min=1950, max=2020, value=2020,
                                    marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
@@ -90,18 +105,25 @@ app.layout = html.Div([
 @app.callback(
     Output("figurehist", "figure"),
     Output("figurehist2", "figure"),
+    Output("year_GES", "min"),
+    Output("year_energie", "min"),
     Input("year_GES", "value"),
     Input("year_energie", "value"),
+    Input("choix_annee_debut_GES", "value"),
+    Input("choix_annee_debut_energie", "value"),
 )
-def callback_slider(year_GES,year_energie):
+def callback_slider(year_GES,year_energie, choix_annee_debut_GES,choix_annee_debut_energie):
     print(year_GES,year_energie)
-    # if (input_value2 == "Par Année"):
-    stock_histo, stock_histo2 = update(year_GES=year_GES,year_energie=year_energie)
+    if (year_GES<=choix_annee_debut_GES) :
+            choix_annee_debut_GES=1950
+    if (year_energie<=choix_annee_debut_energie) :
+            choix_annee_debut_energie=1950
+    
+    stock_histo, stock_histo2 = update(year_GES=year_GES,begin_year_GES=choix_annee_debut_GES,begin_year_energie=choix_annee_debut_energie,year_energie=year_energie)
     figure = stock_histo
     figure2 = stock_histo2
-    # else:
-    #     figure = histo2
-    return figure,figure2
+
+    return figure,figure2,choix_annee_debut_GES,choix_annee_debut_energie
 
 
 app.run_server(debug=True)
