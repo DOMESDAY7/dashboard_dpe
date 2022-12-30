@@ -1,7 +1,6 @@
 from dash import dcc, html, Output, Input
 import plotly.express as px
 import dash
-from model_histogramme import Histogramme
 import pandas as pd
 from model_dpe_map import DpeMap  # import the map
 from faq import faqContent  # import the faq content
@@ -121,11 +120,11 @@ def callback_slider(year_GES,year_energie, choix_annee_debut_GES,choix_annee_deb
     if (year_energie<=choix_annee_debut_energie) :
             choix_annee_debut_energie=1950
     
-    stock_histo, stock_histo2 = update(year_GES=year_GES,begin_year_GES=choix_annee_debut_GES,begin_year_energie=choix_annee_debut_energie,year_energie=year_energie)
-    figure = stock_histo
-    figure2 = stock_histo2
+    stock_histo, stock_histo2 = update(end_year_GES=year_GES, begin_year_GES=choix_annee_debut_GES, begin_year_energie=choix_annee_debut_energie, end_year_energie=year_energie)
+    figure_GES = stock_histo
+    figure_energie = stock_histo2
 
-    return figure, figure2, choix_annee_debut_GES, choix_annee_debut_energie, choix_annee_debut_GES, choix_annee_debut_energie
+    return figure_GES, figure_energie, choix_annee_debut_GES, choix_annee_debut_energie, choix_annee_debut_GES, choix_annee_debut_energie
 
 
 app.run_server(debug=True)
