@@ -29,7 +29,7 @@ app.layout = html.Div([
                 html.Div([
                     html.Div([html.Div([
                         html.H3(
-                            "Estimation Gaz à Effet de Serre par foyer\n en fonction de l'année de construction"),
+                            "Estimation Gaz à Effet de Serre par foyer en fonction de l'année de construction"),
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
                         html.H4("Choix de l'année de début :"),
@@ -107,6 +107,8 @@ app.layout = html.Div([
     Output("figurehist2", "figure"),
     Output("year_GES", "min"),
     Output("year_energie", "min"),
+    Output("choix_annee_debut_GES", "value"),
+    Output("choix_annee_debut_energie", "value"),
     Input("year_GES", "value"),
     Input("year_energie", "value"),
     Input("choix_annee_debut_GES", "value"),
@@ -123,7 +125,7 @@ def callback_slider(year_GES,year_energie, choix_annee_debut_GES,choix_annee_deb
     figure = stock_histo
     figure2 = stock_histo2
 
-    return figure,figure2,choix_annee_debut_GES,choix_annee_debut_energie
+    return figure, figure2, choix_annee_debut_GES, choix_annee_debut_energie, choix_annee_debut_GES, choix_annee_debut_energie
 
 
 app.run_server(debug=True)
