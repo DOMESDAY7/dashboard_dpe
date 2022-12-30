@@ -2,8 +2,8 @@ from Dataset import Dataset
 from model_histogramme import Histogramme
 from model_histogramme2 import Histogramme2
 
-data = Dataset(select=("annee_construction", "latitude", "longitude",
-               "classe_consommation_energie", "estimation_ges", "tv016_departement_code", "geo_adresse", "consommation_energie"), size=10000)
+data = Dataset(select=("annee_construction",
+               "estimation_ges", "geo_adresse", "consommation_energie"), size=10000)
 
 def update( begin_year_GES=1950,year_GES=2020,begin_year_energie=1950,year_energie=2020):
 
