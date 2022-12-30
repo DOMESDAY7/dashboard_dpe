@@ -7,8 +7,8 @@ Pour la carte de la France il y a des points de différentes couleurs (couleurs 
 Les données sont disponibles sur le site https://www.data.gouv.fr/fr/datasets/dpe-logements-avant-juillet-2021/ .
 
 ## Installation
-Pour installer le projet sur votre machine personnelle, en vous plaçant dans la zone de travail que vous voulez, il vous suffit de taper l'instruction : \
-`$ git clone https://github.com/DOMESDAY7/dashboard_dpe`
+Pour installer le projet sur votre machine personnelle, en vous plaçant dans la zone de travail que vous voulez, il vous suffit de taper l'instruction (sans l'espace avant git) : \
+`$ git clone https://github.com/DOMESDAY7/dashboard_dpe. git`
 
 Ce projet utilise des packages dont voici la liste : 
 + colorama version 0.4.6
