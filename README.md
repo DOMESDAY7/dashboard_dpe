@@ -8,7 +8,7 @@ Les données sont disponibles sur le site https://www.data.gouv.fr/fr/datasets/d
 
 ## Installation
 Pour installer le projet sur votre machine personnelle, en vous plaçant dans la zone de travail que vous voulez, il vous suffit de taper l'instruction : \
-`$ git clone ]`
+`$ git clone https://github.com/DOMESDAY7/dashboard_dpe`
 
 Ce projet utilise des packages dont voici la liste : 
 + colorama version 0.4.6
