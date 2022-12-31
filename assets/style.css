@@ -117,7 +117,7 @@ details.card {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  place-items: center;
+  place-items: start center;
 }
 @media (max-width: 768px) {
   .dashboardItemsContainer {

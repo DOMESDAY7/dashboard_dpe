@@ -16,7 +16,8 @@ class Histogramme_average_energie:
         nb_foyer_annee=dict()
         data_consommation_energie = dict()
         moyenne_consommation_energie=dict()
-        #Recuperation du nombre de foyers par annee et un total de la consommation energetique chaque annee pour ensuite faire une moyenne 
+        
+        # Collection of the number of households per year and a total of the energy consumption each year to then make an average 
         for i in t["results"]:
             if (i["annee_construction"] in nb_foyer_annee and i["consommation_energie"]>0):
                 nb_foyer_annee[i["annee_construction"]] += 1
@@ -28,7 +29,7 @@ class Histogramme_average_energie:
 
 
 
-        # moyenne de l estimation de consomation energetique par foyer par année 
+        # average estimated energy consumption per household per year 
         for i in sorted(nb_foyer_annee.keys()):
             if(begin_year<=i<=end_year):
                 moyenne_consommation_energie[i]= data_consommation_energie[i]/nb_foyer_annee[i]
