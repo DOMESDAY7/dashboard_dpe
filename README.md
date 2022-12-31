@@ -47,21 +47,21 @@ flowchart LR;
 ### Avec les interactions
 ```mermaid
 classDiagram
-  test<|--Controller_histogramme
+  App<|--Controller_histogramme
   Dataset<|-- Controller_dpe_map
   Dataset<|-- Controller_histogramme
-  test<|-- Controller_dpe_map
+  App<|-- Controller_dpe_map
   Controller_dpe_map<|-- DpeMap
   Controller_histogramme<|--Histogramme_average_GES
   Controller_histogramme<|--Histogramme_average_energie
   test:+callback()
-  MAINAPP:+int begin_year_energie
-  MAINAPP:+int end_year_energie
-  MAINAPP:+int begin_year_GES
-  MAINAPP:+int end_year_GES
-  MAINAPP:+sliders_value
-  MAINAPP: +histo
-  MAINAPP: +histo2
+  App:+int begin_year_energie
+  App:+int end_year_energie
+  App:+int begin_year_GES
+  App:+int end_year_GES
+  App:+sliders_value
+  App: +histo
+  App: +histo2
   class Controller_histogramme{
     +update()
     +int begin_year_energie
