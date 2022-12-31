@@ -45,7 +45,7 @@ flowchart LR;
   Controller_DPE_map-->model_dpe_map;
 ```
 ### Avec les interactions
-```
+```mermaid
 classDiagram
   MAINAPP<|--Controller_histogramme
   Dataset<|-- Controller_dpe_map
