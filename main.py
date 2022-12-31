@@ -33,17 +33,9 @@ app.layout = html.Div([
                             "Estimation Gaz à Effet de Serre par foyer en fonction de l'année de construction"),
                     ], className="card-header"),
                         dcc.Graph(id="figurehist", className="graph"),
-                        html.H4("Choix de l'année de début :"),
-                        dcc.RadioItems(
-                        id='choix_annee_debut_GES',
-                        options=[1950, 1960, 1970, 1980, 1990, 2000, 2010],
-                        value=1950,
-                        inline=True
-                    ),
                         html.H4("Choix de l'intervalle d'année :"),
-                        dcc.Input(id="input2", type="date", placeholder="", debounce=True),
-                        dcc.Slider(id="year_GES", min=1950, max=2020, value=2020,
-                                   marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
+                        dcc.RangeSlider( min=1950, max=2020, value=[1950,2020], step=10, 
+                        marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'},id="year_GES",)],
                         className="card hist1"),
                     html.Div([html.Div(html.H3("Carte de la France"),
                                        className="card-header"),
@@ -55,17 +47,9 @@ app.layout = html.Div([
                           "Estimation Consommation énergétique par foyer en fonction de l'année de construction\n"),
                 ], className="card-header"),
                     dcc.Graph(id="figurehist2", className="graph"),
-                    html.H4("Choix de l'année de début :"),
-                    dcc.RadioItems(
-                        id='choix_annee_debut_energie',
-                        options=[1950, 1960, 1970, 1980, 1990, 2000, 2010],
-                        value=1950,
-                        inline=True
-                ),
-
                     html.H4("Choix de l'intervalle d'année :"),
-                    dcc.Slider(id="year_energie", min=1950, max=2020, value=2020,
-                               marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'})],
+                    dcc.RangeSlider(min=1950, max=2020, value=[1950,2020], step=10, 
+                        marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'},id="year_energie")],
                     className="card hist2"),
 
             ], className="dashboard"),
@@ -104,28 +88,19 @@ app.layout = html.Div([
 @app.callback(
     Output("figurehist", "figure"),
     Output("figurehist2", "figure"),
-    Output("year_GES", "min"),
-    Output("year_energie", "min"),
-    Output("choix_annee_debut_GES", "value"),
-    Output("choix_annee_debut_energie", "value"),
     Input("year_GES", "value"),
     Input("year_energie", "value"),
-    Input("choix_annee_debut_GES", "value"),
-    Input("choix_annee_debut_energie", "value"),
 )
-def callback_slider(year_GES, year_energie, choix_annee_debut_GES, choix_annee_debut_energie):
+def callback_slider(year_GES, year_energie):
     print(year_GES, year_energie)
-    if (year_GES <= choix_annee_debut_GES):
-        choix_annee_debut_GES = 1950
-    if (year_energie <= choix_annee_debut_energie):
-        choix_annee_debut_energie = 1950
-
-    stock_histo, stock_histo2 = update(end_year_GES=year_GES, begin_year_GES=choix_annee_debut_GES,
-                                       begin_year_energie=choix_annee_debut_energie, end_year_energie=year_energie)
+    begin_year_GES, end_year_GES = year_GES
+    begin_year_energie, end_year_energie = year_energie
+    stock_histo, stock_histo2 = update(end_year_GES=end_year_GES, begin_year_GES=begin_year_GES,
+                                       begin_year_energie=begin_year_energie, end_year_energie=end_year_energie)
     figure_GES = stock_histo
     figure_energie = stock_histo2
 
-    return figure_GES, figure_energie, choix_annee_debut_GES, choix_annee_debut_energie, choix_annee_debut_GES, choix_annee_debut_energie
+    return figure_GES, figure_energie
 
 
 app.run_server(debug=True)
