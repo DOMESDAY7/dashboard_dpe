@@ -27,30 +27,39 @@ app.layout = html.Div([
                     html.H1(
                         'Diagnostic de Performance Energétique (DPE) en France'),
                 ]),
+
+                # histogramme gaz effet de serre
                 html.Div([
-                    html.Div([html.Div([
+                    html.Div([html.Div([html.Div([
                         html.H3(
                             "Estimation Gaz à Effet de Serre par foyer en fonction de l'année de construction"),
                     ], className="card-header"),
-                        dcc.Graph(id="figurehist", className="graph"),
-                        html.H4("Choix de l'intervalle d'année :"),
-                        dcc.RangeSlider( min=1950, max=2020, value=[1950,2020], step=10, 
-                        marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'},id="year_GES",)],
+                        dcc.Graph(id="figurehist", className="graph")],
                         className="card hist1"),
+                        html.Div([
+                            html.H4(["Choix de l'intervalle d'année :"],className="card-header_input"),
+                            dcc.RangeSlider(min=1950, max=2020, value=[1950, 2020], step=10,
+                                            marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'}, id="year_GES",)
+                        ], className="card")], className="containerCardHistogramme"),
+
+                    # carte de france
                     html.Div([html.Div(html.H3("Carte de la France"),
                                        className="card-header"),
                               dcc.Graph(figure=figMap),
                               ], className="card"),
                 ], className="dashboardItemsContainer"),
-                html.Div([html.Div([
+
+                # histogramme consommation energie
+                html.Div([html.Div([html.Div(
                     html.H3(
-                          "Estimation Consommation énergétique par foyer en fonction de l'année de construction\n"),
-                ], className="card-header"),
-                    dcc.Graph(id="figurehist2", className="graph"),
-                    html.H4("Choix de l'intervalle d'année :"),
-                    dcc.RangeSlider(min=1950, max=2020, value=[1950,2020], step=10, 
-                        marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'},id="year_energie")],
-                    className="card hist2"),
+                          "Estimation Consommation énergétique par foyer en fonction de l'année de construction\n"), className="card-header"),
+                    dcc.Graph(id="figurehist2", className="graph")], className="card hist2"),
+                    html.Div([
+                        html.H4(["Choix de l'intervalle d'année :"],
+                                className="card-header_input"),
+                        dcc.RangeSlider(min=1950, max=2020, value=[1950, 2020], step=10,
+                                        marks={1950: '1950', 1960: '1960', 1970: '1970', 1980: '1980', 1990: '1990', 2000: '2000', 2010: '2010', 2020: '2020'}, id="year_energie")], className="card")], className="containerCardHistogramme")
+
 
             ], className="dashboard"),
         ]),

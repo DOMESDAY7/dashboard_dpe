@@ -84,10 +84,16 @@ footer {
 
 .card-header {
   width: 100%;
-  height: 5rem;
+  height: 4.5rem;
   margin: 0;
   padding: 20px;
-  border-bottom: 1px solid #ccc;
+}
+
+.card-header_input {
+  width: 100%;
+  height: 3rem;
+  margin: 0;
+  padding: 20px;
 }
 
 .dashboard .card {
@@ -119,6 +125,13 @@ details.card {
   grid-template-columns: 1fr 1fr;
   place-items: start center;
 }
+
+.containerCardHistogramme{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem 0;
+}
+
 @media (max-width: 768px) {
   .dashboardItemsContainer {
     grid-template-columns: 1fr;
