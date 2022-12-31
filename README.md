@@ -55,16 +55,14 @@ classDiagram
   Controller_dpe_map<|-- DpeMap
   Controller_histogramme<|--Histogramme_average_GES
   Controller_histogramme<|--Histogramme_average_energie
-  class MAINAPP{
-    +callback()
-    +int begin_year_energie
-    +int end_year_energie
-    +int begin_year_GES
-    +int end_year_GES
-    +sliders_value
-    +histo
-    +histo2
-  }
+  MAINAPP:+callback()
+  MAINAPP:+int begin_year_energie
+  MAINAPP:+int end_year_energie
+  MAINAPP:+int begin_year_GES
+  MAINAPP:+int end_year_GES
+  MAINAPP:+sliders_value
+  MAINAPP: +histo
+  MAINAPP: +histo2
   class Controller_histogramme{
     +update()
     +int begin_year_energie
