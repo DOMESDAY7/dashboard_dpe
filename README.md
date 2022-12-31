@@ -47,15 +47,15 @@ flowchart LR;
 ### Avec les interactions
 ```mermaid
 classDiagram
-  app<|--Controller_histogramme
+  MAINAPP<|--Controller_histogramme
   Dataset<|-- Controller_dpe_map
   Dataset<|-- Controller_histogramme
   note for Dataset "Permet de créer un lien vers la base de donnée"
-  app<|-- Controller_dpe_map
+  MAINAPP<|-- Controller_dpe_map
   Controller_dpe_map<|-- DpeMap
   Controller_histogramme<|--Histogramme_average_GES
   Controller_histogramme<|--Histogramme_average_energie
-  class app{
+  class MAINAPP{
     +callback()
     +int begin_year_energie
     +int end_year_energie
