@@ -13,7 +13,8 @@ data.rename(
     columns={"classe_estimation_ges": "Classe consommation d'énergie"}, inplace=True)
 data.rename(columns={"geo_adresse": "Adresse"}, inplace=True)
 
-
+# sort the dataframe by the column "Classe consommation d'énergie"
+data.sort_values(by=["Classe consommation d'énergie"], inplace=True)
 
 # convert the dataframe to a DpeMap object
 figMap = DpeMap(data)
