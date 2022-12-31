@@ -1,13 +1,13 @@
 # User guide
 ## Présentation du projet
 Ce projet porte sur les Diagnostics de Performance Energétique (DPE) en France. Il est composé de deux histogrammes et d'une carte de la France.\
-Un histogramme montre les émissions de Gaz à effet de Serre en fonction de l'année de construction des foyers. Et le deuxième montre la consommation énergétique en fonction de l'année de construction des foyers.\
-Pour la carte de la France il y a des points de différentes couleurs (couleurs qui décrit la classe consommation du foyer).
+Un histogramme montre les émissions de Gaz à effet de Serre en fonction de l'année de construction des foyers. Puis le deuxième montre la consommation énergétique en fonction de l'année de construction des foyers.\
+Pour la carte de la France il y a des points de différentes couleurs (couleurs qui décrit la classe consommation d'énergie du foyer).
 
 Les données sont disponibles sur le site https://www.data.gouv.fr/fr/datasets/dpe-logements-avant-juillet-2021/ .
 
 ## Installation
-Pour installer le projet sur votre machine personnelle, en vous plaçant dans la zone de travail que vous voulez, il vous suffit de taper l'instruction (sans l'espace avant git) : \
+Pour installer le projet sur votre machine personnelle, en vous plaçant dans la zone de travail que vous voulez, il vous suffit de taper l'instruction : \
 `$ git clone https://github.com/DOMESDAY7/dashboard_dpe.git`
 
 Ce projet utilise des packages dont voici la liste : 
@@ -24,37 +24,93 @@ Après l'installation du projet sur votre machine, pour que le projet fonctionne
 En vous plaçant dans le projet, c'est-à-dire ./dashboard_dpe dans le cas où vous n'avez pas changé le nom du projet sur votre machine, vous pouvez lancer le programme en utilisant l'instruction : \
 `$ python main.py`
 
-Ensuite il vous aller à l'adresse indiquée dans un navigateur, dans notre cas il s'agit de http://127.0.0.1:8050/.
+Ensuite il vous suffit d'aller à l'adresse indiquée dans un navigateur, dans notre cas il s'agit de http://127.0.0.1:8050/.
 
 ## Utilisation
 Sur cette page web, vous pouvez visionner deux histogrammes, une carte de la France, ainsi qu'une FAQ qui répond aux questions potentielles de l'utilisateur. 
 
-Pour chaque histogramme, vous avez un slider qui permet de définir l'intervalle d'année . A partir de ces deux paramètres(année de début et année de fin), les histogrammes sont mis à jour. 
+Pour chaque histogramme, vous avez un slider qui permet de définir l'intervalle d'année. A partir de ces deux paramètres(année de début et année de fin), les histogrammes sont mis à jour automatiquement. 
 
 Pour la carte de France, en plaçant votre curseur sur la carte vous pouvez zoomer/ dézoomer avec la molette. Vous pouvez aussi cliquer sur les classes de consommation d'énergie que vous voulez voir ou non.
 
 ## Architecture du code
-
-### Synthèse
+Dans notre architecture, nous nous sommes inspirés de l'architecture MVC (Model View Controller).
+### Synthèse des fichiers
 ```mermaid
 flowchart LR;
   WEB_DASHBOARD-->MAIN;
-  MAIN & get_data-->Controller_Histogramme & Controller_DPE_map;
-  MAIN-->FAQ-->questionsAnswers;
-  Dataset-->get_data;
-  Controller_Histogramme-->model_histogramme & model_histogramme2;
-  model_histogramme-->get_histo;
-  model_histogramme2-->get_histo2;
+  MAIN & Dataset-->Controller_Histogramme & Controller_DPE_map;
+  MAIN-->FAQ-->questionsAnswers.json;
+  Controller_Histogramme-->model_histogramme_average_energie & model_histogramme_average_GES;
   Controller_DPE_map-->model_dpe_map;
-  model_dpe_map-->get_map;
 ```
 ### Avec les interactions
 ```mermaid
 classDiagram
-  MAIN<|--Controller_histogramme
-  Controller_histogramme<|--model_histogramme_average_GES
-  Controller_histogramme<|--model_histogramme_average_energie
-
+  app<|--Controller_histogramme
+  Dataset<|-- Controller_dpe_map
+  Dataset<|-- Controller_histogramme
+  note for Dataset "Permet de créer un lien vers la base de donnée"
+  app<|-- Controller_dpe_map
+  Controller_dpe_map<|-- DpeMap
+  Controller_histogramme<|--Histogramme_average_GES
+  Controller_histogramme<|--Histogramme_average_energie
+  class app{
+    +callback()
+    +int begin_year_energie
+    +int end_year_energie
+    +int begin_year_GES
+    +int end_year_GES
+    +sliders_value
+    +histo
+    +histo2
+  }
+  class Controller_histogramme{
+    +update()
+    +int begin_year_energie
+    +int end_year_energie
+    +int begin_year_GES
+    +int end_year_GES
+    +Histogramme_average_energie
+    +Histogramme_average_GES
+  }
+  class Histogramme_average_GES{
+    +init()
+    +get_histo()
+    +data
+    +int begin_year
+    +int end_year
+  }
+  class Histogramme_average_energie{
+    +init()
+    +get_histo()
+    +data
+    +int begin_year
+    +int end_year
+  }
+  class Dataset{
+    +init()
+    +get_data()
+    +get_fields()
+    +getSize()
+    +getSelect()
+    +getSort()
+    +getFieldValue()
+    +get_dataframe()
+    +dumpURL()
+    +String URL_BASE
+  }
+  class DpeMap{
+    +init()
+    +get_map()
+    +data
+  }
+  class Controller_dpe_map{
+    +data
+    +figmap
+    +DpeMap()
+    +data
+  }
 ```
 
 
