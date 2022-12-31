@@ -54,7 +54,7 @@ classDiagram
   Controller_dpe_map<|-- DpeMap
   Controller_histogramme<|--Histogramme_average_GES
   Controller_histogramme<|--Histogramme_average_energie
-  test:+callback()
+  App:+callback()
   App:+int begin_year_energie
   App:+int end_year_energie
   App:+int begin_year_GES
