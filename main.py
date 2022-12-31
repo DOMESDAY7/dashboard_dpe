@@ -11,7 +11,7 @@ from controller_histogramme import update  # import the histogram
 app = dash.Dash(__name__)
 
 # github icon
-githubIcon = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fgithub%2Fgithub_PNG40.png&f=1&nofb=1&ipt=92afafb5c28685482c8d684e15bfbbfd6e0b2cf2df06fe12edb86b7b4cf134e4&ipo=images"
+githubIcon = "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
 
 
 app.layout = html.Div([
