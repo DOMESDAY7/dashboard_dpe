@@ -29,12 +29,13 @@ Ensuite il vous aller à l'adresse indiquée dans un navigateur, dans notre cas 
 ## Utilisation
 Sur cette page web, vous pouvez visionner deux histogrammes, une carte de la France, ainsi qu'une FAQ qui répond aux questions potentielles de l'utilisateur. 
 
-Pour chaque histogramme, vous avez des boutons qui permttent de définir à partir de quelle année de construction l'histogramme commence et un slider qui permet de définit la dernière année de l'intervalle. A partir de ces deux paramètres les histogrammes sont mis à jour. 
+Pour chaque histogramme, vous avez un slider qui permet de définir l'intervalle d'année . A partir de ces deux paramètres(année de début et année de fin), les histogrammes sont mis à jour. 
 
 Pour la carte de France, en plaçant votre curseur sur la carte vous pouvez zoomer/ dézoomer avec la molette. Vous pouvez aussi cliquer sur les classes de consommation d'énergie que vous voulez voir ou non.
 
 ## Architecture du code
 
+### Synthèse
 ```mermaid
 flowchart LR;
   WEB_DASHBOARD-->MAIN;
@@ -47,3 +48,20 @@ flowchart LR;
   Controller_DPE_map-->model_dpe_map;
   model_dpe_map-->get_map;
 ```
+### Avec les interactions
+```mermaid
+classDiagram
+  MAIN<|--Controller_histogramme
+  Controller_histogramme<|--model_histogramme_average_GES
+  Controller_histogramme<|--model_histogramme_average_energie
+
+```
+
+
+
+## Copyright
+Je déclare sur l’honneur que le code fourni a été produit par moi/nous même, à l’exception des lignes ci dessous.
+
+Pour chaque ligne (ou groupe de lignes) empruntée, donner la référence de la source et une explication de la syntaxe utilisée.
+
+Toute ligne non déclarée est réputée être produite par l’auteur (ou les auteurs) du projet. L’absence ou l’omission de déclaration sera considéré comme du plagiat.
