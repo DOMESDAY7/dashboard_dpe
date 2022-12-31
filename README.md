@@ -110,7 +110,17 @@ classDiagram
   }
 ```
 
+## Conclusion 
+On peut voir que plus les foyers ont été construits il y a longtemps plus la consommation énergétique et le taux d'émissions de gaz à effet de serre sont élevés, donc dû notamment à l'isolation. Il faut donc isoler les vieux bâtiments car ce sont les moins isolés.
 
+
+# Developper guide
+Nous avons donc utilisé une architecture avec Model View Controller, View est ici le fichier main. Ce fichier va faire appelle dans la fonction callback aux différents controllers pour mettre à jour ici les histogrammes en fonction des valeurs des sliders.
+
+Chaque fichier controller récupère la data que l'on veut avec le constructeur de Dataset. Pour faire un histogramme sur une autre donnée, il faudrait changer le paramètre de get_data dans le modèle changer ainsi que le nom que recherche les dictionnaires. De même pour la map.
+
+Les fichiers model récupèrent la data en brut et stockent en fonction des noms de data dans certains dictionnaires.
+Ces classes ont deux fonction une init et une get_map/get_histo qui retourne juste la map ou l'histogramme.
 
 ## Copyright
 Je déclare sur l’honneur que le code fourni a été produit par moi/nous même, à l’exception des lignes ci dessous.
