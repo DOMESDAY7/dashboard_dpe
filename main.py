@@ -112,4 +112,4 @@ def callback_slider(year_GES, year_energie):
     return figure_GES, figure_energie
 
 
-app.run_server(debug=True)
+app.run_server(debug=False)
