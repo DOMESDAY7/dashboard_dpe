@@ -50,7 +50,6 @@ classDiagram
   test<|--Controller_histogramme
   Dataset<|-- Controller_dpe_map
   Dataset<|-- Controller_histogramme
-  note for Dataset "Permet de créer un lien vers la base de donnée"
   test<|-- Controller_dpe_map
   Controller_dpe_map<|-- DpeMap
   Controller_histogramme<|--Histogramme_average_GES
